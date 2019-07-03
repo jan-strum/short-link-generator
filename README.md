@@ -1,4 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Shortlink Generator
+
+The following project provides a base for building a shortlink generating
+application like https://bit.ly. In this repository you will find:
+
+- A backend server running [Express](https://expressjs.com/)
+- A frontnend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
+
+You will be responsible for building the backend API and frontend UI for creating,
+and viewing shortlinks. The design of this system should be based on the
+requirements you gathered in the previous interview.
+
+Some things to keep in mind to keep things simple:
+
+- Do not worry about users or authentication
+- Do not worry about click and view analytics
+- Do not worry about expiring links or providing delete functionality
+
+## Project Requirements
+
+- Your database of shortlinks should persist between server restarts.
+- The backened should have API endpoints to create shortlinks, list all
+  shortlinks, and view a single shortlink.
+- The frontend should have a view to create shortlinks, a view to display all
+  shortlinks, and a view to display a single shortlink.
+- There should be minimal styles applied (you don't need a pixel perfect UI)
+
+## Working on and submitting your finished project
+
+In order to work on your project and submit it you should:
+
+- Fork this project to your personal Github profile
+- Develop the application locally
+- Create a pull request on this repository when you are done
+- Our team will review the application and in the final interview we will
+  discuss the application with you.
 
 ## Available Scripts
 
