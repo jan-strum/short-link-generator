@@ -4,7 +4,7 @@ The following project provides a base for building a shortlink generating
 application like https://bit.ly. In this repository you will find:
 
 - A backend server running [Express](https://expressjs.com/)
-- A frontnend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
+- A frontend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
 
 You will be responsible for building the backend API and frontend UI for creating,
 and viewing shortlinks. The design of this system should be based on the
