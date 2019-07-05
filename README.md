@@ -23,7 +23,7 @@ Some things to keep in mind to keep things simple:
 ## Project Requirements
 
 - Your database of shortlinks should persist between server restarts.
-- There should be an endpoint that resolves `localhost/abcxyz` to whatever was
+- There should be an endpoint that resolves `http://localhost:3000/[SHORTLINK]` to whatever was
   created for that shortlink.
 - The backened should have a RESTful API to create shortlinks, list all
   shortlinks, and view a single shortlink.
@@ -32,6 +32,11 @@ Some things to keep in mind to keep things simple:
 - There should be minimal styles applied (you don't need a pixel perfect UI,
   just enough to see design considerations).
 
+## Time Considerations
+
+Please do not spend a whole weekend or a full work day on this project. You
+should be able to have something worthy of MVP status in about two hours or so.
+
 ## Working on and submitting your finished project
 
 In order to work on your project and submit it you should:
@@ -39,7 +44,7 @@ In order to work on your project and submit it you should:
 - Fork this project to your personal Github profile
 - Develop the application locally
 - Create a pull request on this repository when you are done
-- Our team will review the application and in the final interview we will
+- Our team will review the application and in the following interview we will
   discuss the application with you.
 
 ## Available Scripts
