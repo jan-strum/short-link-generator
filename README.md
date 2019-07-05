@@ -1,7 +1,11 @@
 # Shortlink Generator
 
 The following project provides a base for building a shortlink generating
-application like https://bit.ly. In this repository you will find:
+application like https://bit.ly.
+
+We'll call it https://z4th.com/
+
+In this repository you will find:
 
 - A backend server running [Express](https://expressjs.com/)
 - A frontend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
@@ -19,11 +23,14 @@ Some things to keep in mind to keep things simple:
 ## Project Requirements
 
 - Your database of shortlinks should persist between server restarts.
-- The backened should have API endpoints to create shortlinks, list all
+- There should be an endpoint that resolves `localhost/abcxyz` to whatever was
+  created for that shortlink.
+- The backened should have a RESTful API to create shortlinks, list all
   shortlinks, and view a single shortlink.
-- The frontend should have a view to create shortlinks, a view to display all
-  shortlinks, and a view to display a single shortlink.
-- There should be minimal styles applied (you don't need a pixel perfect UI)
+- The frontend should have a view to create shortlinks and a view to display all
+  shortlinks.
+- There should be minimal styles applied (you don't need a pixel perfect UI,
+  just enough to see design considerations).
 
 ## Working on and submitting your finished project
 
