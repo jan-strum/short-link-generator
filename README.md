@@ -41,10 +41,10 @@ should be able to have something worthy of MVP status in about two hours or so.
 
 In order to work on your project and submit it you should:
 
-- Fork this project to your personal Github profile
-- Develop the application locally
-- Create a pull request on this repository when you are done
-- Our team will review the application and in the following interview we will
+- Clone this project to your local machine
+- Develop the application locally in whatever IDE you choose
+- Push it to your Github profile and let us know when you have finished
+- Our team will review the project and in the following interview we will
   discuss the application with you.
 
 ## Available Scripts
