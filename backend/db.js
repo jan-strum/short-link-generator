@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const shortid = require('shortid')
 const { username, password } = '/secrets.js'
 
 const db = new Sequelize('zf', username, password, {
@@ -6,11 +7,9 @@ const db = new Sequelize('zf', username, password, {
   logging: false
 })
 
-// console.log(db)
-
-const ShortLink = db.define('shortlink', {
+const TargetLink = db.define('targetlink', {
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -19,9 +18,9 @@ const ShortLink = db.define('shortlink', {
   }
 })
 
-const TargetLink = db.define('targetlink', {
+const ShortLink = db.define('shortlink', {
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -32,13 +31,26 @@ const TargetLink = db.define('targetlink', {
 
 TargetLink.hasOne(ShortLink)
 
-const seed = async () => {
-  const target = await TargetLink.create({ url: 'https://www.youtube.com/' })
-  const short = await ShortLink.create({ url: 'https://www.youtube.com/' })
-  await target.setShortlink(short)
-  await db.sync()
-}
+// const seed = async () => {
+//   const BASE_URL = 'https://zforth.com/'
+//   const youtube = await TargetLink.create({ url: 'https://www.youtube.com/' })
+//   const youtubeId = shortid.generate(youtube.url)
+//   const shortYoutube = await ShortLink.create({
+//     url: BASE_URL + youtubeId
+//   })
+//   // console.log(Object.keys(youtube.__proto__))
+//   await youtube.setShortlink(shortYoutube)
 
-seed()
+//   const github = await TargetLink.create({ url: 'https://github.com/' })
+//   const githubId = shortid.generate(github.url)
+//   const shortGithub = await ShortLink.create({
+//     url: BASE_URL + githubId
+//   })
+//   await github.setShortlink(shortGithub)
 
-module.exports = db
+//   await db.sync({ force: true })
+// }
+
+// seed()
+
+module.exports = { db, TargetLink, ShortLink }

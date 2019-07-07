@@ -1,32 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import axios from 'axios'
+import CreateNewLink from './components/CreateNewLink'
+import './App.css'
+import AllLinks from './components/AllLinks'
 
-import config from './config.json';
+import config from './config.json'
 
-const LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`;
+const LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Replace me with shortlinks UI</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <a
-            className="App-link"
-            onClick={()=> {
-              fetch(LINKS_URL).then((resp)=> { 
-                resp.json().then((x)=> alert(JSON.stringify(x)));
-              });
-            }}
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      data: [],
+      targetUrl: '',
+      newLink: {},
+      display: 'create'
+    }
+  }
+  componentDidMount = async () => {
+    this.fetchData()
+  }
+  fetchData = async () => {
+    const { data } = await axios.get(LINKS_URL)
+    this.setState({ data })
+  }
+  toggleDisplay = str => {
+    this.setState({ display: str })
+  }
+  copyToClipboard = url => {
+    const el = document.createElement('textarea')
+    el.value = url
+    el.setAttribute('readonly', '')
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
+  }
+
+  render() {
+    return (
+      <div>
+        <header>
+          <h1>Short Link Generator!</h1>
+        </header>
+        <nav>
+          <div
+            className='nav-item'
+            onClick={() => this.toggleDisplay('create')}
           >
-            Alert /api/links
-          </a>
-        </p>
-      </header>
-    </div>
-  );
+            Create
+          </div>
+          <div className='nav-item' onClick={() => this.toggleDisplay('view')}>
+            View
+          </div>
+        </nav>
+        {this.state.display === 'create' ? (
+          <CreateNewLink
+            LINKS_URL={LINKS_URL}
+            fetchData={this.fetchData}
+            copyToClipboard={this.copyToClipboard}
+          />
+        ) : (
+          <AllLinks
+            data={this.state.data}
+            copyToClipboard={this.copyToClipboard}
+          />
+        )}
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
