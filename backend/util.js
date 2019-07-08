@@ -1,27 +1,32 @@
 const { ShortLink, TargetLink } = require('./db')
-const shortid = require('shortid')
-const BASE_URL = 'https://zforth.com/'
 
 // Source: https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+const generateHash = str => {
+  let hash = 0
 
-// const hash = () => {
-//   let firstPart = (Math.random() * 46656) | 0
-//   let secondPart = (Math.random() * 46656) | 0
+  if (str.length === 0) return hash
 
-//   firstPart = ('000' + firstPart.toString(36)).slice(-3)
-//   secondPart = ('000' + secondPart.toString(36)).slice(-3)
+  for (let i = 0; i < str.length; i++) {
+    let currentChar = str.charCodeAt(i)
+    hash = (hash << 5) - hash + currentChar
+    hash = hash & hash
+    hash = hash >>> 0
+  }
 
-//   return firstPart + secondPart
-// }
+  return hash
+}
 
 const associateLink = async (link, url) => {
-  const id = shortid.generate(link.url)
-  const shortLink = await ShortLink.create({ url: BASE_URL + id })
+  const hash = generateHash(link.url)
+
+  const shortLink = await ShortLink.create({ hash })
   await link.setShortlink(shortLink)
+
   const newlyAssociatedLink = await TargetLink.findOne({
     where: { url },
     include: ShortLink
   })
+
   return newlyAssociatedLink
 }
 

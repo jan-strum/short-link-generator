@@ -7,22 +7,39 @@ const { SERVE_HOSTNAME, SERVE_PORT } = require('../src/config.json')
 
 const app = express()
 
-app.use(bodyParser.json())
-
 app.all('*', function(req, res, next) {
   console.log(`${req.method} ${req.url}`)
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
     'Access-Control-Allow-Headers',
-    // res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'),
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'),
     'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With'
   )
   next() // pass control to the next handler
 })
 
+app.use(bodyParser.json())
+
 app.get('/', (req, res) => {
   console.log('Backend ok')
   res.send('Backend ok')
+})
+
+app.get('/:hash', async (req, res, next) => {
+  try {
+    const { hash } = req.params
+    const shortLink = await ShortLink.findOne({
+      where: { hash },
+      include: TargetLink
+    })
+    res.redirect(shortLink.targetlink.url)
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.get('/api/links', async (req, res, next) => {
@@ -44,14 +61,19 @@ app.post('/api/links', async (req, res, next) => {
       include: ShortLink
     })
 
-    if (!link.shortlink) {
-      const newlyAssociatedLink = await associateLink(link, url)
-      res.json(newlyAssociatedLink)
-    } else {
+    if (link.shortlink) {
       res.send(link)
+    } else {
+      const newlyAssociatedLink = await associateLink(link, url)
+      res.send(newlyAssociatedLink)
     }
+
     await db.sync()
   } catch (error) {
+    const message = error.errors[0].message
+    if (message.includes('isUrl')) {
+      res.send('This is not a valid URL. Please try again.')
+    }
     next(error)
   }
 })

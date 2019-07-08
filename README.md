@@ -1,6 +1,6 @@
-# Shortlink Generator
+# ShortLink Generator
 
-The following project provides a base for building a shortlink generating
+The following project provides a base for building a ShortLink generating
 application like https://bit.ly.
 
 We'll call it https://z4th.com/
@@ -11,7 +11,7 @@ In this repository you will find:
 - A frontend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
 
 You will be responsible for building the backend API and frontend UI for creating,
-and viewing shortlinks. The design of this system should be based on the
+and viewing ShortLinks. The design of this system should be based on the
 requirements you gathered in the previous interview.
 
 Some things to keep in mind to keep things simple:
@@ -22,13 +22,13 @@ Some things to keep in mind to keep things simple:
 
 ## Project Requirements
 
-- Your database of shortlinks should persist between server restarts.
-- There should be an endpoint that resolves `http://localhost:3000/[SHORTLINK]` to whatever was
-  created for that shortlink.
-- The backened should have a RESTful API to create shortlinks, list all
-  shortlinks, and view a single shortlink.
-- The frontend should have a view to create shortlinks and a view to display all
-  shortlinks.
+- Your database of ShortLinks should persist between server restarts.
+- There should be an endpoint that resolves `http://localhost:3000/[ShortLink]` to whatever was
+  created for that ShortLink.
+- The backened should have a RESTful API to create ShortLinks, list all
+  ShortLinks, and view a single ShortLink.
+- The frontend should have a view to create ShortLinks and a view to display all
+  ShortLinks.
 - There should be minimal styles applied (you don't need a pixel perfect UI,
   just enough to see design considerations).
 
@@ -76,5 +76,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run backend`
 
-Runs the shortlinks backend server.<br/>
+Runs the ShortLinks backend server.<br/>
 Open [http://localhost:8181](http://localhost:3000) to view it in the browser.

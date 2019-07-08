@@ -7,20 +7,19 @@ nav {
   display: flex;
   justify-content: flex-end;
   margin-right: 20em;
-  margin-bottom: 5px;
+  margin-bottom: 2em;
 }
 
 .nav-item {
-  margin: 1em;
+  padding: 0.2em 1em 0.5em 1em;
+  border-bottom: 1px solid black;
+}
+.nav-item:first-child {
+  border-right: 1px solid black;
 }
 
 .nav-item:hover {
   cursor: default;
-}
-
-#new-link {
-  width: 100%;
-  align-items: center;
 }
 
 #form {
@@ -38,14 +37,36 @@ nav {
 
 button {
   display: inline-block;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+#new-link {
+  width: 60%;
+  margin: 0 auto;
+  padding: 4em;
+  align-items: center;
+}
+
+#all-links {
+  width: 70%;
 }
 
 table {
+  table-layout: fixed;
+  width: 80%;
   border-spacing: 2em;
-  display: table;
   margin: 0 auto;
 }
 
+th {
+  text-align: left;
+}
+
 td {
-  width: 1em;
+  word-wrap: break-word;
+}
+
+td:nth-child(3) {
+  width: 200px;
 }

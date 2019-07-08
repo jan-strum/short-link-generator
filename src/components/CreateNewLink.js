@@ -11,20 +11,28 @@ export default class CreateNewLink extends React.Component {
     }
   }
 
+  postLink = async () => {
+    const { LINKS_URL } = this.props
+    const { data } = await axios.post(LINKS_URL, { url: this.state.targetUrl })
+    return data
+  }
   handleChange = e => {
     this.setState({ targetUrl: e.target.value })
   }
   handleSubmit = async () => {
-    const { LINKS_URL } = this.props
-    // check for valid input
-    this.alertEmptyInput()
-    const { data } = await axios.post(LINKS_URL, { url: this.state.targetUrl })
+    if (!this.state.targetUrl.length) return
+
+    const data = await this.postLink()
+    if (data === 'This is not a valid URL. Please try again.') {
+      this.alertInvalidInput(data)
+      return
+    }
+
     this.setState({
       targetUrl: '',
       newLink: data
-      // data: [...this.state.data, data]
-    }) // check that it does not already contain this item
-    this.setState({ target: '' })
+    })
+
     this.props.fetchData()
   }
   alertEmptyInput = () => {
@@ -32,7 +40,10 @@ export default class CreateNewLink extends React.Component {
       window.alert('This field may not be blank.')
     }
   }
-  alertInvalidInput = () => {}
+  alertInvalidInput = errorMessage => {
+    window.alert(errorMessage)
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +61,10 @@ export default class CreateNewLink extends React.Component {
           <button
             form='create-shortlink'
             type='button'
-            onClick={this.handleSubmit}
+            onClick={() => {
+              this.alertEmptyInput()
+              this.handleSubmit()
+            }}
           >
             Create
           </button>
@@ -58,7 +72,8 @@ export default class CreateNewLink extends React.Component {
         {this.state.newLink.url && (
           <NewLink
             newLinkUrl={this.state.newLink.url}
-            shortLinkUrl={this.state.newLink.shortlink.url}
+            hash={this.state.newLink.shortlink.hash}
+            REDIRECT_URL={this.props.REDIRECT_URL}
             copyToClipboard={this.props.copyToClipboard}
           />
         )}

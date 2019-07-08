@@ -1,28 +1,27 @@
 import React from 'react'
 import axios from 'axios'
 import CreateNewLink from './components/CreateNewLink'
-import './App.css'
 import AllLinks from './components/AllLinks'
+import './App.css'
 
 import config from './config.json'
-
-const LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
       data: [],
-      targetUrl: '',
-      newLink: {},
       display: 'create'
     }
+
+    this.LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`
+    this.REDIRECT_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}`
   }
   componentDidMount = async () => {
     this.fetchData()
   }
   fetchData = async () => {
-    const { data } = await axios.get(LINKS_URL)
+    const { data } = await axios.get(this.LINKS_URL)
     this.setState({ data })
   }
   toggleDisplay = str => {
@@ -42,7 +41,7 @@ class App extends React.Component {
     return (
       <div>
         <header>
-          <h1>Short Link Generator!</h1>
+          <h1>Short Link Generator</h1>
         </header>
         <nav>
           <div
@@ -57,13 +56,15 @@ class App extends React.Component {
         </nav>
         {this.state.display === 'create' ? (
           <CreateNewLink
-            LINKS_URL={LINKS_URL}
+            LINKS_URL={this.LINKS_URL}
             fetchData={this.fetchData}
+            REDIRECT_URL={this.REDIRECT_URL}
             copyToClipboard={this.copyToClipboard}
           />
         ) : (
           <AllLinks
             data={this.state.data}
+            REDIRECT_URL={this.REDIRECT_URL}
             copyToClipboard={this.copyToClipboard}
           />
         )}
