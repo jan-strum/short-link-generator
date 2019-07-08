@@ -13,32 +13,34 @@ export default class CreateNewLink extends React.Component {
 
   postLink = async () => {
     const { LINKS_URL } = this.props
-    const { data } = await axios.post(LINKS_URL, { url: this.state.targetUrl })
+    const url = this.state.targetUrl
+    const { data } = await axios.post(LINKS_URL, { url })
+
     return data
   }
-  handleChange = e => {
-    this.setState({ targetUrl: e.target.value })
+  handleChange = event => {
+    this.setState({ targetUrl: event.target.value })
   }
   handleSubmit = async () => {
-    if (!this.state.targetUrl.length) return
+    if (!this.state.targetUrl.length) {
+      this.alertEmptyInput()
+      return
+    }
 
     const data = await this.postLink()
     if (data === 'This is not a valid URL. Please try again.') {
       this.alertInvalidInput(data)
-      return
+    } else {
+      this.setState({
+        targetUrl: '',
+        newLink: data
+      })
     }
 
-    this.setState({
-      targetUrl: '',
-      newLink: data
-    })
-
-    this.props.fetchData()
+    this.props.getData()
   }
   alertEmptyInput = () => {
-    if (!this.state.targetUrl.length) {
-      window.alert('This field may not be blank.')
-    }
+    window.alert('This field may not be blank.')
   }
   alertInvalidInput = errorMessage => {
     window.alert(errorMessage)
@@ -62,7 +64,6 @@ export default class CreateNewLink extends React.Component {
             form='create-shortlink'
             type='button'
             onClick={() => {
-              this.alertEmptyInput()
               this.handleSubmit()
             }}
           >
@@ -72,7 +73,7 @@ export default class CreateNewLink extends React.Component {
         {this.state.newLink.url && (
           <NewLink
             newLinkUrl={this.state.newLink.url}
-            hash={this.state.newLink.shortlink.hash}
+            hashValue={this.state.newLink.hash.value}
             REDIRECT_URL={this.props.REDIRECT_URL}
             copyToClipboard={this.props.copyToClipboard}
           />

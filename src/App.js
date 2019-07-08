@@ -17,10 +17,11 @@ class App extends React.Component {
     this.LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`
     this.REDIRECT_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}`
   }
+
   componentDidMount = async () => {
-    this.fetchData()
+    this.getData()
   }
-  fetchData = async () => {
+  getData = async () => {
     const { data } = await axios.get(this.LINKS_URL)
     this.setState({ data })
   }
@@ -57,7 +58,7 @@ class App extends React.Component {
         {this.state.display === 'create' ? (
           <CreateNewLink
             LINKS_URL={this.LINKS_URL}
-            fetchData={this.fetchData}
+            getData={this.getData}
             REDIRECT_URL={this.REDIRECT_URL}
             copyToClipboard={this.copyToClipboard}
           />

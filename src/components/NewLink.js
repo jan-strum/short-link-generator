@@ -1,7 +1,12 @@
 import React from 'react'
 
-const NewShortLink = ({ newLinkUrl, hash, REDIRECT_URL, copyToClipboard }) => {
-  const shortLink = `z4th.com/${hash}`
+const NewShortLink = ({
+  newLinkUrl,
+  hashValue,
+  REDIRECT_URL,
+  copyToClipboard
+}) => {
+  const shortLink = `${REDIRECT_URL}/${hashValue}`
 
   return (
     <table id='new-link'>
@@ -22,10 +27,12 @@ const NewShortLink = ({ newLinkUrl, hash, REDIRECT_URL, copyToClipboard }) => {
             <a href={newLinkUrl}>{newLinkUrl}</a>
           </td>
           <td>
-            <a href={`${REDIRECT_URL}/${hash}`}>{shortLink}</a>
+            <a href={shortLink}>{shortLink}</a>
           </td>
           <td>
-            <button onClick={copyToClipboard(hash)}>Copy to clipboard</button>
+            <button onClick={copyToClipboard(hashValue)}>
+              Copy to clipboard
+            </button>
           </td>
         </tr>
       </tbody>
