@@ -1,4 +1,4 @@
-const { ShortLink, TargetLink } = require('./db')
+const { Hash, TargetLink } = require('./db')
 
 // Source: https://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
 const generateHash = str => {
@@ -17,14 +17,14 @@ const generateHash = str => {
 }
 
 const associateLink = async (link, url) => {
-  const hash = generateHash(link.url)
+  const value = generateHash(link.url)
 
-  const shortLink = await ShortLink.create({ hash })
-  await link.setShortlink(shortLink)
+  const hash = await Hash.create({ value })
+  await link.setHash(hash)
 
   const newlyAssociatedLink = await TargetLink.findOne({
     where: { url },
-    include: ShortLink
+    include: Hash
   })
 
   return newlyAssociatedLink

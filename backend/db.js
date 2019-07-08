@@ -17,8 +17,8 @@ const TargetLink = db.define('targetlink', {
   }
 })
 
-const ShortLink = db.define('shortlink', {
-  hash: {
+const Hash = db.define('hash', {
+  value: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -27,7 +27,7 @@ const ShortLink = db.define('shortlink', {
   }
 })
 
-TargetLink.hasOne(ShortLink)
-ShortLink.belongsTo(TargetLink)
+TargetLink.hasOne(Hash)
+Hash.belongsTo(TargetLink)
 
-module.exports = { db, TargetLink, ShortLink }
+module.exports = { db, TargetLink, Hash }

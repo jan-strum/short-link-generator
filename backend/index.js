@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const associateLink = require('./util')
-const { db, ShortLink, TargetLink } = require('./db')
+const { db, Hash, TargetLink } = require('./db')
 
 const { SERVE_HOSTNAME, SERVE_PORT } = require('../src/config.json')
 
@@ -29,14 +29,14 @@ app.get('/', (req, res) => {
   res.send('Backend ok')
 })
 
-app.get('/:hash', async (req, res, next) => {
+app.get('/:value', async (req, res, next) => {
   try {
-    const { hash } = req.params
-    const shortLink = await ShortLink.findOne({
-      where: { hash },
+    const { value } = req.params
+    const hash = await Hash.findOne({
+      where: { value },
       include: TargetLink
     })
-    res.redirect(shortLink.targetlink.url)
+    res.redirect(hash.targetlink.url)
   } catch (error) {
     next(error)
   }
@@ -45,7 +45,7 @@ app.get('/:hash', async (req, res, next) => {
 app.get('/api/links', async (req, res, next) => {
   try {
     const links = await TargetLink.findAll({
-      include: ShortLink
+      include: Hash
     })
     res.send(links)
   } catch (error) {
@@ -58,10 +58,10 @@ app.post('/api/links', async (req, res, next) => {
     const { url } = req.body
     const [link] = await TargetLink.findOrCreate({
       where: { url },
-      include: ShortLink
+      include: Hash
     })
 
-    if (link.shortlink) {
+    if (link.hash) {
       res.send(link)
     } else {
       const newlyAssociatedLink = await associateLink(link, url)
@@ -81,7 +81,7 @@ app.post('/api/links', async (req, res, next) => {
 app.get('/api/links/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    const link = await TargetLink.findByPk(id, { include: ShortLink })
+    const link = await TargetLink.findByPk(id, { include: Hash })
     res.send(link)
   } catch (error) {
     next(error)
