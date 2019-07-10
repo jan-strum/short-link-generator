@@ -10,15 +10,7 @@ const app = express()
 app.all('*', function(req, res, next) {
   console.log(`${req.method} ${req.url}`)
   res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'),
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
-  )
+  res.header('Access-Control-Allow-Headers', '*')
   next() // pass control to the next handler
 })
 
