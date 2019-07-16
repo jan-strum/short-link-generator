@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Header from './components/Header'
 import CreateNewLink from './components/CreateNewLink'
 import AllLinks from './components/AllLinks'
 import './App.css'
@@ -20,7 +21,6 @@ class App extends React.Component {
 
   componentDidMount = async () => {
     this.getData()
-    console.log(this.LINKS_URL)
   }
   getData = async () => {
     const { data } = await axios.get(this.LINKS_URL)
@@ -42,20 +42,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <header>
-          <h1>Short Link Generator</h1>
-        </header>
-        <nav>
-          <div
-            className='nav-item'
-            onClick={() => this.toggleDisplay('create')}
-          >
-            Create
-          </div>
-          <div className='nav-item' onClick={() => this.toggleDisplay('view')}>
-            View
-          </div>
-        </nav>
+        <Header toggleDisplay={this.toggleDisplay} />
         {this.state.display === 'create' ? (
           <CreateNewLink
             LINKS_URL={this.LINKS_URL}
