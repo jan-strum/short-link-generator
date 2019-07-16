@@ -30,7 +30,7 @@ const NewShortLink = ({
             <a href={shortLink}>{shortLink}</a>
           </td>
           <td>
-            <button onClick={copyToClipboard(hashValue)}>
+            <button onClick={() => copyToClipboard(hashValue)}>
               Copy to clipboard
             </button>
           </td>

@@ -1,51 +1,6 @@
-# ShortLink Generator
+# Description
 
-The following project provides a base for building a ShortLink generating
-application like https://bit.ly.
-
-We'll call it https://z4th.com/
-
-In this repository you will find:
-
-- A backend server running [Express](https://expressjs.com/)
-- A frontend React application bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
-
-You will be responsible for building the backend API and frontend UI for creating,
-and viewing ShortLinks. The design of this system should be based on the
-requirements you gathered in the previous interview.
-
-Some things to keep in mind to keep things simple:
-
-- Do not worry about users or authentication
-- Do not worry about click and view analytics
-- Do not worry about expiring links or providing delete functionality
-
-## Project Requirements
-
-- Your database of ShortLinks should persist between server restarts.
-- There should be an endpoint that resolves `http://localhost:3000/[ShortLink]` to whatever was
-  created for that ShortLink.
-- The backened should have a RESTful API to create ShortLinks, list all
-  ShortLinks, and view a single ShortLink.
-- The frontend should have a view to create ShortLinks and a view to display all
-  ShortLinks.
-- There should be minimal styles applied (you don't need a pixel perfect UI,
-  just enough to see design considerations).
-
-## Time Considerations
-
-Please do not spend a whole weekend or a full work day on this project. You
-should be able to have something worthy of MVP status in about two hours or so.
-
-## Working on and submitting your finished project
-
-In order to work on your project and submit it you should:
-
-- Clone this project to your local machine
-- Develop the application locally in whatever IDE you choose
-- Push it to your Github profile and let us know when you have finished
-- Our team will review the project and in the following interview we will
-  discuss the application with you.
+This application allows you to create shortened URLs and copy them to your clipboard.
 
 ## Available Scripts
 
@@ -58,6 +13,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+### `npm run backend`
+
+Runs the backend server.
 
 ### `npm test`
 
