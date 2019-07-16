@@ -74,7 +74,7 @@ export default class CreateNewLink extends React.Component {
           <NewLink
             newLinkUrl={this.state.newLink.url}
             hashValue={this.state.newLink.hash.value}
-            REDIRECT_URL={this.props.REDIRECT_URL}
+            BASE_URL={this.props.BASE_URL}
             copyToClipboard={this.props.copyToClipboard}
           />
         )}

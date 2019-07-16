@@ -14,12 +14,13 @@ class App extends React.Component {
       display: 'create'
     }
 
-    this.LINKS_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}/api/links`
-    this.REDIRECT_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}`
+    this.BASE_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}`
+    this.LINKS_URL = `${this.BASE_URL}/api/links`
   }
 
   componentDidMount = async () => {
     this.getData()
+    console.log(this.LINKS_URL)
   }
   getData = async () => {
     const { data } = await axios.get(this.LINKS_URL)
@@ -59,13 +60,13 @@ class App extends React.Component {
           <CreateNewLink
             LINKS_URL={this.LINKS_URL}
             getData={this.getData}
-            REDIRECT_URL={this.REDIRECT_URL}
+            BASE_URL={this.BASE_URL}
             copyToClipboard={this.copyToClipboard}
           />
         ) : (
           <AllLinks
             data={this.state.data}
-            REDIRECT_URL={this.REDIRECT_URL}
+            BASE_URL={this.BASE_URL}
             copyToClipboard={this.copyToClipboard}
           />
         )}

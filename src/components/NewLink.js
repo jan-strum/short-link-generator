@@ -1,12 +1,7 @@
 import React from 'react'
 
-const NewShortLink = ({
-  newLinkUrl,
-  hashValue,
-  REDIRECT_URL,
-  copyToClipboard
-}) => {
-  const shortLink = `${REDIRECT_URL}/${hashValue}`
+const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
+  const shortLink = `${BASE_URL}/${hashValue}`
 
   return (
     <table id='new-link'>

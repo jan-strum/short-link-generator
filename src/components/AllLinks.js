@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AllLinks = ({ data, REDIRECT_URL, copyToClipboard }) => (
+const AllLinks = ({ data, BASE_URL, copyToClipboard }) => (
   <table id='all-links'>
     <colgroup>
       <col width='60%' />
@@ -16,7 +16,7 @@ const AllLinks = ({ data, REDIRECT_URL, copyToClipboard }) => (
     <tbody>
       {data.map(link => {
         const hashValue = link.hash.value
-        const shortLink = `${REDIRECT_URL}/${hashValue}`
+        const shortLink = `${BASE_URL}/${hashValue}`
         return (
           <tr key={link.id}>
             <td>
