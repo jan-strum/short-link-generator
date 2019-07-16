@@ -4,7 +4,8 @@ This application allows you to create shortened URLs and copy them to your clipb
 
 ## Setup
 
-Before you can run the application, be sure to create a Postgres database called `short-link-generator`. You can either create a `secrets.js` from which you export your database username and password, or you can comment out line 2 in `backend/db.js` and replace the login credentials with your own on line 4.
+Before you can run the application, be sure to create a Postgres database called `short-link-generator`.
+Then, you can either create a `secrets.js` from which you export your database username and password, or you can comment out line 2 in `backend/db.js` and replace the login credentials with your own on line 4.
 
 ## Available Scripts
 
