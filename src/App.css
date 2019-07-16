@@ -6,20 +6,27 @@ h1 {
 nav {
   display: flex;
   justify-content: flex-end;
-  margin-right: 20em;
+  margin-right: 2em;
   margin-bottom: 2em;
 }
 
 .nav-item {
   padding: 0.2em 1em 0.5em 1em;
-  border-bottom: 1px solid black;
+  border-bottom: 1.5px solid rgb(210, 210, 210);
+  border-radius: 4px;
+  margin: 0 0.2em;
 }
 .nav-item:first-child {
-  border-right: 1px solid black;
+  border-right: 1.5px solid rgb(210, 210, 210);
 }
-
 .nav-item:hover {
   cursor: default;
+}
+#selected {
+  background-color: #f5f5f5;
+}
+#not-selected {
+  background-color: white;
 }
 
 #form {

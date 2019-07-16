@@ -42,7 +42,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header toggleDisplay={this.toggleDisplay} />
+        <Header
+          toggleDisplay={this.toggleDisplay}
+          display={this.state.display}
+        />
         {this.state.display === 'create' ? (
           <CreateNewLink
             LINKS_URL={this.LINKS_URL}
