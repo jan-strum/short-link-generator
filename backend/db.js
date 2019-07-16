@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const { username, password } = '/secrets.js'
 
-const db = new Sequelize('zf', username, password, {
+const db = new Sequelize('short-link-generator', username, password, {
   dialect: 'postgres',
   logging: false
 })
