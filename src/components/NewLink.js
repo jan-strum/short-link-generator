@@ -1,4 +1,5 @@
 import React from 'react'
+import CopyToClipboard from './CopyToClipboard'
 
 const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
   const shortLink = `${BASE_URL}/${hashValue}`
@@ -25,9 +26,10 @@ const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
             <a href={shortLink}>{shortLink}</a>
           </td>
           <td>
-            <button onClick={() => copyToClipboard(hashValue)}>
-              Copy to clipboard
-            </button>
+            <CopyToClipboard
+              copyToClipboard={copyToClipboard}
+              shortLink={shortLink}
+            />
           </td>
         </tr>
       </tbody>

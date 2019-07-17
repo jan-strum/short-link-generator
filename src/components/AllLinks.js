@@ -1,4 +1,5 @@
 import React from 'react'
+import CopyToClipboard from './CopyToClipboard'
 
 const AllLinks = ({ data, BASE_URL, copyToClipboard }) => (
   <table id='all-links'>
@@ -26,9 +27,10 @@ const AllLinks = ({ data, BASE_URL, copyToClipboard }) => (
               <a href={shortLink}>{shortLink}</a>
             </td>
             <td>
-              <button onClick={() => copyToClipboard(shortLink)}>
-                Copy to clipboard
-              </button>
+              <CopyToClipboard
+                copyToClipboard={copyToClipboard}
+                shortLink={shortLink}
+              />
             </td>
           </tr>
         )
