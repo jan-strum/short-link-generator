@@ -1,7 +1,13 @@
 import React from 'react'
 import CopyToClipboard from './CopyToClipboard'
 
-const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
+const NewLink = ({
+  newLinkUrl,
+  hashValue,
+  BASE_URL,
+  currentClipboard,
+  copyToClipboard
+}) => {
   const shortLink = `${BASE_URL}/${hashValue}`
 
   return (
@@ -27,8 +33,9 @@ const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
           </td>
           <td>
             <CopyToClipboard
-              copyToClipboard={copyToClipboard}
               shortLink={shortLink}
+              currentClipboard={currentClipboard}
+              copyToClipboard={copyToClipboard}
             />
           </td>
         </tr>
@@ -37,4 +44,4 @@ const NewShortLink = ({ newLinkUrl, hashValue, BASE_URL, copyToClipboard }) => {
   )
 }
 
-export default NewShortLink
+export default NewLink

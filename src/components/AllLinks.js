@@ -1,7 +1,7 @@
 import React from 'react'
 import CopyToClipboard from './CopyToClipboard'
 
-const AllLinks = ({ data, BASE_URL, copyToClipboard }) => (
+const AllLinks = ({ data, BASE_URL, copyToClipboard, currentClipboard }) => (
   <table id='all-links'>
     <colgroup>
       <col width='60%' />
@@ -28,8 +28,9 @@ const AllLinks = ({ data, BASE_URL, copyToClipboard }) => (
             </td>
             <td>
               <CopyToClipboard
-                copyToClipboard={copyToClipboard}
                 shortLink={shortLink}
+                currentClipboard={currentClipboard}
+                copyToClipboard={copyToClipboard}
               />
             </td>
           </tr>

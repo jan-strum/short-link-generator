@@ -2,11 +2,12 @@ import React from 'react'
 
 export default class CopyToClipboard extends React.Component {
   render() {
-    const { copyToClipboard, shortLink } = this.props
+    const { copyToClipboard, shortLink, currentClipboard } = this.props
+    console.log(shortLink)
 
     return (
       <button onClick={() => copyToClipboard(shortLink)}>
-        Copy to clipboard
+        {currentClipboard !== shortLink ? 'Copy to clipboard' : 'Copied!'}
       </button>
     )
   }

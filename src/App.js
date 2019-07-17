@@ -12,7 +12,8 @@ class App extends React.Component {
     super()
     this.state = {
       data: [],
-      display: 'create'
+      display: 'create',
+      currentClipboard: ''
     }
 
     this.BASE_URL = `//${config.SERVE_HOSTNAME}:${config.SERVE_PORT}`
@@ -29,14 +30,16 @@ class App extends React.Component {
   toggleDisplay = str => {
     this.setState({ display: str })
   }
-  copyToClipboard = url => {
+  copyToClipboard = shortLink => {
     const el = document.createElement('textarea')
-    el.value = url
+    el.value = shortLink
     el.setAttribute('readonly', '')
     document.body.appendChild(el)
     el.select()
     document.execCommand('copy')
     document.body.removeChild(el)
+
+    this.setState({ currentClipboard: shortLink })
   }
 
   render() {
@@ -48,15 +51,17 @@ class App extends React.Component {
         />
         {this.state.display === 'create' ? (
           <CreateNewLink
+            BASE_URL={this.BASE_URL}
             LINKS_URL={this.LINKS_URL}
             getData={this.getData}
-            BASE_URL={this.BASE_URL}
+            currentClipboard={this.state.currentClipboard}
             copyToClipboard={this.copyToClipboard}
           />
         ) : (
           <AllLinks
-            data={this.state.data}
             BASE_URL={this.BASE_URL}
+            data={this.state.data}
+            currentClipboard={this.state.currentClipboard}
             copyToClipboard={this.copyToClipboard}
           />
         )}

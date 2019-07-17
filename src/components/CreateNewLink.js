@@ -47,6 +47,8 @@ export default class CreateNewLink extends React.Component {
   }
 
   render() {
+    const { BASE_URL, currentClipboard } = this.props
+
     return (
       <div>
         <div id='form'>
@@ -74,7 +76,8 @@ export default class CreateNewLink extends React.Component {
           <NewLink
             newLinkUrl={this.state.newLink.url}
             hashValue={this.state.newLink.hash.value}
-            BASE_URL={this.props.BASE_URL}
+            BASE_URL={BASE_URL}
+            currentClipboard={currentClipboard}
             copyToClipboard={this.props.copyToClipboard}
           />
         )}
