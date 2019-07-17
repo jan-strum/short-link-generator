@@ -21,7 +21,9 @@ export default class CreateNewLink extends React.Component {
   handleChange = event => {
     this.setState({ targetUrl: event.target.value })
   }
-  handleSubmit = async () => {
+  handleSubmit = async e => {
+    e.preventDefault()
+
     if (!this.state.targetUrl.length) {
       this.alertEmptyInput()
       return
@@ -52,7 +54,12 @@ export default class CreateNewLink extends React.Component {
     return (
       <div>
         <div id='form'>
-          <form id='create-shortlink'>
+          <form
+            id='create-shortlink'
+            onSubmit={e => {
+              this.handleSubmit(e)
+            }}
+          >
             <label htmlFor='targetUrl'>Paste your link here:</label>
             <input
               id='targetUrl-input'
@@ -62,13 +69,7 @@ export default class CreateNewLink extends React.Component {
               onChange={this.handleChange}
             />
           </form>
-          <button
-            form='create-shortlink'
-            type='button'
-            onClick={() => {
-              this.handleSubmit()
-            }}
-          >
+          <button form='create-shortlink' type='submit'>
             Create
           </button>
         </div>
