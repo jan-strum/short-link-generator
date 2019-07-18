@@ -30,8 +30,10 @@ export default class CreateNewLink extends React.Component {
     }
 
     const data = await this.postLink()
-    if (data === 'This is not a valid URL. Please try again.') {
-      this.alertInvalidInput(data)
+    console.log(data)
+    if (!data.url) {
+      // If the short link was not successfully created,
+      this.alertInvalidInput(data) // then trigger an alert with the error messages in the data variable.
     } else {
       this.setState({
         targetUrl: '',
@@ -44,8 +46,16 @@ export default class CreateNewLink extends React.Component {
   alertEmptyInput = () => {
     window.alert('This field may not be blank.')
   }
-  alertInvalidInput = errorMessage => {
-    window.alert(errorMessage)
+  alertInvalidInput = data => {
+    const heading =
+      'The following errors occurred while processing your request:\n\n'
+    const errors = this.formatErrors(data)
+    window.alert(heading + errors)
+  }
+  formatErrors = data => {
+    const errors = data.map(error => '- ' + error).join('\n')
+
+    return errors
   }
 
   render() {
