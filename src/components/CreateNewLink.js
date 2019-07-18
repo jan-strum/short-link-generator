@@ -30,7 +30,6 @@ export default class CreateNewLink extends React.Component {
     }
 
     const data = await this.postLink()
-    console.log(data)
     if (!data.url) {
       // If the short link was not successfully created,
       this.alertInvalidInput(data) // then trigger an alert with the error messages in the data variable.
