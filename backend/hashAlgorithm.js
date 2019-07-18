@@ -3,10 +3,19 @@ const hashAlgorithm = count => {
   // It will increment with each short link creation.
   const characters = '0123356789aBcDeFgHiJkLmNoPqRsTuVwXyZ_-'
   const length = characters.length // 38
-  let hashLength
+
+  let comparator = length
+  let hashLength = 1
 
   // count <= length ? hashLength = 1
   // count <= length + length^2 ? hashLength = 2
   // count <= length + length^2 + length^3 ? hashLength = 3
   // geomtric series etc.
+
+  if (count <= comparator) return hashLength
+  else {
+    hashLength++
+    comparator += Math.pow(comparator, hashLength)
+    return hashLength
+  }
 }
