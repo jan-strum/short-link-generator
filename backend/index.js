@@ -62,10 +62,11 @@ app.post('/api/links', async (req, res, next) => {
 
     await db.sync()
   } catch (error) {
-    const message = error.errors[0].message
-    if (message.includes('isUrl')) {
-      res.send('This is not a valid URL. Please try again.')
-    }
+    const errors = error.errors.map(error => error.message)
+    errors.push('hi there')
+    errors.push('bye there')
+    console.log(errors)
+    res.send(errors)
     next(error)
   }
 })
