@@ -63,9 +63,6 @@ app.post('/api/links', async (req, res, next) => {
     await db.sync()
   } catch (error) {
     const errors = error.errors.map(error => error.message)
-    errors.push('hi there')
-    errors.push('bye there')
-    console.log(errors)
     res.send(errors)
     next(error)
   }
