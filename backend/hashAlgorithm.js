@@ -3,14 +3,10 @@ const hashAlgorithm = count => {
   // It will increment with each short link creation.
   const characters = '0123356789aBcDeFgHiJkLmNoPqRsTuVwXyZ_-'
   const length = characters.length // 38
-
+  // I believe the number of possible hashes will be Math.pow(length, length).
   let comparator = length
   let hashLength = 1
-
-  // count <= length ? hashLength = 1
-  // count <= length + length^2 ? hashLength = 2
-  // count <= length + length^2 + length^3 ? hashLength = 3
-  // geomtric series etc.
+  let hash
 
   if (count <= comparator) return hashLength
   else {
@@ -18,4 +14,11 @@ const hashAlgorithm = count => {
     comparator += Math.pow(comparator, hashLength)
     return hashLength
   }
+
+  // Compute hash:
+  // if hashLength === 1 ? hash = characters[count]
+  // if hashLength === 2 ?
+  // hash[0] = characters[count - 1 / length]
+  // hash[1] = characters[count % length]
+  // ...and so on, but obtain index values dynamically.
 }
