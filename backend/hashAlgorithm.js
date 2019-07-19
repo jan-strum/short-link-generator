@@ -4,21 +4,20 @@ const hashAlgorithm = count => {
   const characters = '0123356789aBcDeFgHiJkLmNoPqRsTuVwXyZ_-'
   const length = characters.length // 38
   // I believe the number of possible hashes will be Math.pow(length, length).
-  let comparator = length
+  let comparator = length // 38
   let hashLength = 1
   let hash
 
-  if (count <= comparator) return hashLength
-  else {
+  // Compute hashLength:
+  while (count > comparator) {
     hashLength++
     comparator += Math.pow(comparator, hashLength)
-    return hashLength
   }
 
   // Compute hash:
   // if hashLength === 1 ? hash = characters[count]
   // if hashLength === 2 ?
-  // hash[0] = characters[count - 1 / length]
+  // hash[0] = characters[Math.floor(count - 1 / length)]
   // hash[1] = characters[count % length]
   // ...and so on, but obtain index values dynamically.
 }
