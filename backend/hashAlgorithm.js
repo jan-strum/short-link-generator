@@ -6,7 +6,7 @@ const hashAlgorithm = count => {
   // I believe the number of possible hashes will be Math.pow(length, length).
   let comparator = length // 38
   let hashLength = 1
-  let hash
+  let hash = ''
 
   // Compute hashLength:
   while (count > comparator) {
@@ -20,4 +20,13 @@ const hashAlgorithm = count => {
   // hash[0] = characters[Math.floor(count - 1 / length)]
   // hash[1] = characters[count % length]
   // ...and so on, but obtain index values dynamically.
+
+  for (let i = 1; i <= hashLength; i++) {
+    let index = i - 1
+    if (i === hashLength) {
+      hash[index] = characters[count % length]
+    }
+  }
+
+  return hash
 }
