@@ -24,7 +24,8 @@ const hashAlgorithm = count => {
   for (let i = 1; i <= hashLength; i++) {
     let index = i - 1
     if (i === hashLength) {
-      hash[index] = characters[count % length]
+      hash[index] = characters[count % length] // 0 => 4
+      return hash
     }
   }
 
