@@ -31,3 +31,17 @@ const hashAlgorithm = count => {
 
   return hash
 }
+
+// Trial:
+const length = 3
+const currentHashLength = 2
+const i = 2
+const count = 7
+
+const sectionLength = Math.pow(length, currentHashLength) // / Math.pow(length, i)
+
+const subsSectionLength = sectionLength / length
+
+const shiftedCount = count - Math.pow(length, currentHashLength - 1)
+
+const numerator = Math.ceil(shiftedCount / subsSectionLength)
