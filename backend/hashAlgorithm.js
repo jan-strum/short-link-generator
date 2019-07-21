@@ -21,11 +21,24 @@ const hashAlgorithm = count => {
   // hash[1] = characters[count % length]
   // ...and so on, but obtain index values dynamically.
 
+  let minuend = 0 // 4
+
   for (let i = 1; i <= hashLength; i++) {
     let index = i - 1
     if (i === hashLength) {
       hash[index] = characters[count % length] // 0 => 4
       return hash
+    }
+
+    let power = 0
+    let tempMinuend = Math.floor(count - 1) / length
+    let difference = Math.pow(length, power)
+    let nextMinuend = minuend + difference
+
+    // Compute minuend:
+    while (tempMinuend >= nextMinuend) {
+      minuend += difference
+      power++
     }
   }
 
